@@ -1,0 +1,21 @@
+	.file	"calcnew.c"
+	.text
+.globl calcnew
+	.type	calcnew, @function
+calcnew:
+	pushl	%ebp            
+	movl	%esp, %ebp      
+	movl	8(%ebp), %edx   //x into %edx
+	movl	16(%ebp), %ecx  //z into %edx
+	imull   $3, %edx        //%edx is x*3 = 3x
+	movl    12(%ebp), %eax  //y into %eax
+	imull	$7, %eax        //%eax is y*7 = 7y
+        addl    %edx, %eax      //%eax is 3x + 7y
+	movl    %ecx, %edx      //z into %edx
+	imull   $14, %edx       //%edx is z*14 = 14z
+        addl    %edx, %eax      //%eax is 3x + 7y + 14z
+	popl	%ebp
+	ret
+	.size	calcnew, .-calcnew
+	.ident	"GCC: (Ubuntu 4.3.3-5ubuntu4) 4.3.3"
+	.section	.note.GNU-stack,"",@progbits
